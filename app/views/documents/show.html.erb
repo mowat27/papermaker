@@ -1,0 +1,10 @@
+<h1><%= @document.name %> </h1>
+<%= link_to('Home', documents_path) %>
+<%= link_to('Edit', edit_document_path(@document)) %>
+
+
+<h3><%= @document.title %> </h3>
+<p>
+  <%= @document.content %>
+</p>
+

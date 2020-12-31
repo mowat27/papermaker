@@ -1,0 +1,10 @@
+default: &default
+  aws_region: 'eu-west-1'
+  pdfgen:
+    input_queue: https://sqs.eu-west-1.amazonaws.com/525027603511/pdfgen-input-20201231172114211100000001
+
+development:
+  <<: *default
+
+production:
+  <<: *default

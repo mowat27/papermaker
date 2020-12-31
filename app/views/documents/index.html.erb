@@ -8,8 +8,8 @@
   <% @documents.each do |document| %>
     <li>
       <%= link_to(document.name, document_path(document)) %> <%= link_to "Delete", document, :method => :delete, :confirm => "Are you sure ?"%>
-      <% if document.latest_pdf %>
-        <%= link_to("Download", document.latest_pdf.url) %>
+      <% if document.pdf %>
+        <%= link_to("Download", document.pdf.url) %>
       <% end %>
     </li>
   <% end %>

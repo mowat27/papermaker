@@ -3,7 +3,7 @@ class Api::PdfsController < ApplicationController
 
   def update
     pdf = Pdf.find(params[:id])
-    Pdf.update(pdf.id, url: pdf_params)
+    Pdf.update(pdf.id, url: pdf_params, status: 'available')
     render json: {message: "OK"}
   rescue ActiveRecord::RecordNotFound
     render json: {message: "Not found"}, status: 404

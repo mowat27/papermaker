@@ -15,7 +15,6 @@ class DocumentsController < ApplicationController
 
   def create
     document = Document.new(document_params)
-    @document.pdfs.create
     if document.save
       redirect_to documents_path
     end
@@ -28,7 +27,6 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
     @document.update(document_params)
-    @document.pdfs.create
     redirect_to documents_path
   end
   
@@ -44,11 +42,12 @@ class DocumentsController < ApplicationController
   end
 
   def request_pdf
+    pdf = @document.pdfs.create(status: 'requested')
     queue = Rails.configuration.aws.pdfgen[:input_queue]
     payload = {
       generated_by: "newsify",
       metadata_version: "0.1",
-      callback_url: api_pdf_url(@document.latest_pdf)
+      callback_url: api_pdf_url(pdf)
     }
 
     puts "Sending #{payload} to #{queue}"
@@ -61,7 +60,5 @@ class DocumentsController < ApplicationController
       message_body: payload.to_json,
       delay_seconds: 0
     )
-
-    puts resp
   end
 end

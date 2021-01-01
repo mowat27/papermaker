@@ -53,7 +53,7 @@ class DocumentsController < ApplicationController
     pdf = @document.pdfs.create(status: 'requested')
     queue = Rails.configuration.aws.pdfgen[:input_queue]
     payload = {
-      generated_by: "newsify",
+      generated_by: "papermaker",
       metadata_version: "0.1",
       callback_url: api_pdf_url(pdf),
       document: {

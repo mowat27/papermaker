@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,900&display=swap');
+$pinkA: #692743;
+$pinkB: #ED9FC1;
+$pinkC: #E85695;
+$pinkD: #692743;
+$pinkE: #B54374;
 html,
 body {
     margin: 0;
@@ -9,17 +14,18 @@ body {
 
 .logo {
     font-size: 2em;
-    color: #EC9EC0;
+    color: $pinkB;
 }
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 header {
     display: flex;
     justify-content: space-between;
-    background: #694655;
+    background: $pinkD;
     padding: 1em 2em;
 }
 
@@ -39,7 +45,7 @@ header {
         border: 1px solid black;
         padding: 0.5em;
         border-radius: 5pt;
-        background: #E85795;
+        background: $pinkC;
     }
 }
 

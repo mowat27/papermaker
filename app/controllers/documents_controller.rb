@@ -22,8 +22,8 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    document = Document.new(document_params)
-    if document.save
+    @document = Document.new(document_params)
+    if @document.save
       redirect_to documents_path
     end
   end

@@ -4,4 +4,45 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
+    background: #efefef;
+}
+
+.logo {
+    font-size: 2em;
+    color: #EC9EC0;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background: #694655;
+    padding: 1em 2em;
+}
+
+#nav {
+    a {
+        color: white;
+    }
+    color: white;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    li {
+        list-style: none;
+        margin-left: 1.5em;
+    }
+    .cta {
+        border: 1px solid black;
+        padding: 0.5em;
+        border-radius: 5pt;
+        background: #E85795;
+    }
+}
+
+.content-wrapper {
+    margin: 2em;
 }

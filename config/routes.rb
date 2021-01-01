@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources 'documents'
+  resources 'documents' do
+    post 'generate', as: 'generate'
+  end
 
   namespace :api do 
     resources :pdfs, only: [:update]

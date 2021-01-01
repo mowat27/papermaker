@@ -11,6 +11,7 @@
       <% if document.pdf %>
         <%= link_to("Download", document.pdf.url) %>
       <% end %>
+      <%= link_to("Regenerate", document_generate_path(document.id), method: :post) %>
     </li>
   <% end %>
 </ul>

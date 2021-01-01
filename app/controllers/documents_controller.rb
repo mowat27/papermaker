@@ -13,6 +13,14 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
   end
 
+  def generate
+    @document = Document.find(params[:document_id])
+    if @document
+      request_pdf
+      redirect_to documents_path
+    end    
+  end
+
   def create
     document = Document.new(document_params)
     if document.save
@@ -47,7 +55,10 @@ class DocumentsController < ApplicationController
     payload = {
       generated_by: "newsify",
       metadata_version: "0.1",
-      callback_url: api_pdf_url(pdf)
+      callback_url: api_pdf_url(pdf),
+      document: {
+        content: @document.to_json
+      }
     }
 
     puts "Sending #{payload} to #{queue}"

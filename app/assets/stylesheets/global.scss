@@ -20,7 +20,7 @@ body {
 }
 
 a {
-    // text-decoration: none;
+    text-decoration: none;
     color: black;
 }
 
@@ -86,7 +86,7 @@ header {
     tr {
         line-height: 2em;
     }
-    a:hover {
+    a {
         text-decoration: underline;
     }
     .pending {

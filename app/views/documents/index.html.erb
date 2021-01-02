@@ -15,9 +15,9 @@
           <td><%= link_to("Edit", edit_document_path(document.id)) %></td>
           <td>        
             <% if document.pdf.status == 'requested' %>
-              <span class="pending">PDF Pending</span>
+              <span class="pdf-download pending">PDF Pending</span>
             <% elsif document.pdf.status == 'available' %>
-              <%= link_to("Download PDF", document.pdf.url) %>
+              <span class="pdf-download available"><%= link_to("Download PDF", document_download_path(document), download: true) %></span>
             <% end %>
           </td>
           <td><%= link_to("Generate", document_generate_path(document.id), method: :post) %></td>

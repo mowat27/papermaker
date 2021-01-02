@@ -19,6 +19,19 @@ class DocumentsController < ApplicationController
     end    
   end
   
+  def download
+    document = Document.find(params[:document_id])
+    if document.pdf.url && document.pdf.status == 'available'
+      data = open(document.pdf.url).read
+      send_data(data, 
+        filename: "#{document.name}.pdf",
+        type: 'application/pdf', 
+        disposition: 'attachment', 
+        stream: 'true', 
+        buffer_size: '4096' )
+      end
+  end
+  
   def create
     document = Document.new(document_params)
     if document.save

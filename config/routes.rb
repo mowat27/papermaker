@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources 'documents' do
     post 'generate', as: 'generate'
+    get 'download', as: 'download'
   end
 
   namespace :api do 

@@ -6,7 +6,6 @@ class Api::CallbackController < ApplicationController
     message = Message.new(data_params)
     case message.type
     when "pdf_document"
-      
       document = Document.find(message.relationships.requester.data.document_id.to_i)
       if document
         if document.version == message.relationships.requester.data.version

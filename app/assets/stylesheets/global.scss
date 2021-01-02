@@ -4,6 +4,7 @@ $pinkB: #ED9FC1;
 $pinkC: #E85695;
 $pinkD: #692743;
 $pinkE: #B54374;
+$logo: #E8DC6D;
 html,
 body {
     margin: 0;
@@ -14,7 +15,8 @@ body {
 
 .logo {
     font-size: 2em;
-    color: $pinkB;
+    color: $logo;
+    font-weight: 700;
 }
 
 a {
@@ -42,7 +44,6 @@ header {
         margin-left: 1.5em;
     }
     .cta {
-        border: 1px solid black;
         padding: 0.5em;
         border-radius: 5pt;
         background: $pinkC;
@@ -51,4 +52,21 @@ header {
 
 .content-wrapper {
     margin: 2em;
+}
+
+.listing {
+    table {
+        width: 90%;
+        margin: auto;
+    }
+    td.title {
+        width: 50%;
+        padding-right: 2em;
+    }
+    tr {
+        line-height: 2em;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
 }

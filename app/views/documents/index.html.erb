@@ -1,17 +1,26 @@
-<h1>Documents</h1>
+<h1>Newspapers</h1>
 
-<div class="links">
-  <%= link_to('new', new_document_path) %>
-</div>
-
-<ul>
-  <% @documents.each do |document| %>
-    <li>
-      <%= link_to(document.name, document_path(document)) %> <%= link_to "Delete", document, :method => :delete, :confirm => "Are you sure ?"%>
-      <% if document.pdf %>
-        <%= link_to("Download", document.pdf.url) %>
+<div class="newspapers listing">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th colspan="4">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @documents.each do |document| %>
+        <tr>
+          <td class="title"><%= document.name %></td>
+          <td><%= link_to("Edit", edit_document_path(document.id)) %></td>
+          <td>        
+            <% if document.pdf %>
+              <%= link_to("Download", document.pdf.url) %>
+            <% end %>
+          </td>
+          <td><%= link_to("Generate", document_generate_path(document.id), method: :post) %></td>
+          <td><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>
       <% end %>
-      <%= link_to("Regenerate", document_generate_path(document.id), method: :post) %>
-    </li>
-  <% end %>
-</ul>
+    </tbody>
+  </table>
+</div>

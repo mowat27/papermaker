@@ -23,7 +23,7 @@ class Api::CallbackController < ApplicationController
       attributes: [:url, :expires],
       relationships: {
         requester: {
-          data: [:name, :document_id, :checksum]
+          data: [:name, :document_id, :version]
         }
       }
     )

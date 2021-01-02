@@ -53,7 +53,8 @@ class DocumentsController < ApplicationController
     document = Document.find(document_id)
     queue = Rails.configuration.aws.pdfgen[:input_queue]
 
-    pdf = document.pdfs.create(status: 'requested')
+    Pdf.create_or_find_by(document_id: document.id, status: "requested")
+     
     payload = {
       meta: {
         owner: "papermaker",

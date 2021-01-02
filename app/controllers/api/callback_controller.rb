@@ -3,9 +3,25 @@ class Api::CallbackController < ApplicationController
 
 
   def create
-    case payload[:type]
+    message = Message.new(data_params)
+    case message.type
     when "pdf_document"
-      render json: {status: "In Progress", message: payload[:type]}, status: 406
+      
+      document = Document.find(message.relationships.requester.data.document_id.to_i)
+      if document
+        if document.version == message.relationships.requester.data.version
+          document.pdf.update(url: message.attributes.url, 
+            status: "available",
+            expires_at: DateTime.parse(message.attributes.expires)
+          )
+          render json: {message: "OK"}, status: 200
+        else
+          render json: {message: "Document has changed since the request"}, status: 406 
+        end
+      else
+        render json: {message: "Document not found"}, status: 406
+      end
+
     when "pdf_preview"
       render json: {status: "OK", message: payload[:type] + " received"}
     when "pdf_thumbnail"
@@ -17,7 +33,7 @@ class Api::CallbackController < ApplicationController
 
   private 
   
-  def payload
+  def data_params
     params.require(:data).permit(
       :type,
       attributes: [:url, :expires],
@@ -27,5 +43,13 @@ class Api::CallbackController < ApplicationController
         }
       }
     )
+  end
+end
+
+class Message
+  delegate :type, :attributes, :relationships, to: :@ostruct
+
+  def initialize(data_params)
+    @ostruct = JSON.parse(data_params.to_json, object_class: OpenStruct)
   end
 end

@@ -13,14 +13,17 @@
         <tr>
           <td class="title"><%= document.name %></td>
           <td><%= link_to("Edit", edit_document_path(document.id)) %></td>
-          <td>        
-            <% if document.pdf.status == 'requested' %>
-              <span class="pdf-download pending">PDF Pending</span>
-            <% elsif document.pdf.status == 'available' %>
-              <span class="pdf-download available"><%= link_to("Download PDF", document_download_path(document), download: true) %></span>
+          <td>
+            <% if document.pdf %>
+              <%= link_to("Download", document_download_path(document), 
+                          download: true, 
+                          "data-pdf-id" => document.pdf.id,
+                          class: "pdf-download #{document.pdf.status}") %>
+            <% else %>
+              <span class="pdf-download missing">missing pdf</span>
             <% end %>
           </td>
-          <td><%= link_to("Generate", document_generate_path(document.id), method: :post) %></td>
+          <td><%= link_to("Generate", document_generate_path(document.id), method: :post, remote: true) %></td>
           <td><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>
       <% end %>
     </tbody>

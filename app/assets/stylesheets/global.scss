@@ -57,10 +57,16 @@ header {
         padding: 0.8em 0;
         font-size: 0.9em;
         background: lightgray;
+        color: white;
     }
     .notice {
-        color: white;
         background: #87B531;
+    }
+    .warning {
+        background: #E8C36D;
+    }
+    .error {
+        background: #B54731;
     }
 }
 

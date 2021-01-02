@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   namespace :api do 
     resources :pdfs, only: [:update]
+    post :callback, to: "callback#create"
+    put :callback, to: "callback#create"
   end
 
   root 'documents#index'

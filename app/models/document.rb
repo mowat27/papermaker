@@ -1,5 +1,6 @@
 class Document < ApplicationRecord
   has_many :pdfs, -> { order('id desc') }
+  has_one :preview_image
 
   def latest_pdf  
     pdfs.limit(1).first

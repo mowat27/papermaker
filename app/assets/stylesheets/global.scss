@@ -20,7 +20,7 @@ body {
 }
 
 a {
-    text-decoration: none;
+    // text-decoration: none;
     color: black;
 }
 
@@ -47,6 +47,20 @@ header {
         padding: 0.5em;
         border-radius: 5pt;
         background: $pinkC;
+    }
+}
+
+.flash {
+    width: 100%;
+    text-align: center;
+    .message {
+        padding: 0.8em 0;
+        font-size: 0.9em;
+        background: lightgray;
+    }
+    .notice {
+        color: white;
+        background: #87B531;
     }
 }
 

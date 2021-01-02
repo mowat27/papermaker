@@ -6,11 +6,11 @@ class DocumentsController < ApplicationController
   def new
     @document = Document.new
   end
-
+  
   def show
     @document = Document.find(params[:id])
   end
-
+  
   def generate
     document = Document.find(params[:document_id])
     if document
@@ -30,26 +30,26 @@ class DocumentsController < ApplicationController
         stream: 'true', 
         buffer_size: '4096' )
       end
-  end
-  
-  def create
-    document = Document.new(document_params)
-    if document.save
-      request_new_pdf(document.id)
-      redirect_to documents_path
     end
-  end
-  
-  def edit
-    @document = Document.find(params[:id])
-  end
-  
-  def update
-    document = Document.find(params[:id])
-    document.update(document_params)
-    request_new_pdf(document.id)
-    redirect_to documents_path
-  end
+    
+    def create
+      document = Document.new(document_params)
+      if document.save
+        request_new_pdf(document.id)
+        redirect_to documents_path, notice: "Created \"#{document.name}\""
+      end
+    end
+    
+    def edit
+      @document = Document.find(params[:id])
+    end
+    
+    def update
+      document = Document.find(params[:id])
+      document.update(document_params)
+      request_new_pdf(document.id)
+      redirect_to documents_path, notice: "Updated \"#{document.name}\""
+    end
   
   def destroy
     @document = Document.find(params[:id])

@@ -21,6 +21,13 @@
         </ul>
       </nav>
     </header>
+    <div class="flash">
+      <% flash.each do |type, msg| %>
+        <div class='message <%= type %>'>
+          <%= msg %>
+        </div>
+      <% end %>
+    </div>
     <div class="content-wrapper">
       <%= yield %>
     </div>

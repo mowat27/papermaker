@@ -1,17 +1,19 @@
-<%= form_with(model: @document, local: true) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
+<div class='form'>
+  <%= form_with(model: @document, local: true) do |f| %>
+    <div class='section'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class='section'>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class='section'>
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+    <div class='section'>
+      <%= f.submit('Save', class: "btn-save") %>
+    </div>
+  <% end %>
+</div>

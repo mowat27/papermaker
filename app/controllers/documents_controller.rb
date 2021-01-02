@@ -1,6 +1,4 @@
 class DocumentsController < ApplicationController
-  after_action :request_pdf, only: [:create, :update]
-
   def index
     @documents = Document.all
   end
@@ -14,16 +12,17 @@ class DocumentsController < ApplicationController
   end
 
   def generate
-    @document = Document.find(params[:document_id])
-    if @document
-      request_pdf
+    document = Document.find(params[:document_id])
+    if document
+      request_new_pdf(document.id)
       redirect_to documents_path
     end    
   end
-
+  
   def create
-    @document = Document.new(document_params)
-    if @document.save
+    document = Document.new(document_params)
+    if document.save
+      request_new_pdf(document.id)
       redirect_to documents_path
     end
   end
@@ -33,8 +32,9 @@ class DocumentsController < ApplicationController
   end
   
   def update
-    @document = Document.find(params[:id])
-    @document.update(document_params)
+    document = Document.find(params[:id])
+    document.update(document_params)
+    request_new_pdf(document.id)
     redirect_to documents_path
   end
   
@@ -49,15 +49,28 @@ class DocumentsController < ApplicationController
     params.require(:document).permit(:name, :title, :content)
   end
 
-  def request_pdf
-    pdf = @document.pdfs.create(status: 'requested')
+  def request_new_pdf(document_id)
+    document = Document.find(document_id)
     queue = Rails.configuration.aws.pdfgen[:input_queue]
+
+    pdf = document.pdfs.create(status: 'requested')
     payload = {
-      generated_by: "papermaker",
-      metadata_version: "0.1",
-      callback_url: api_pdf_url(pdf),
-      document: {
-        content: @document.to_json
+      meta: {
+        owner: "papermaker",
+        metadata_version: "0.1",
+      },
+      links: {
+        callback: api_callback_url
+      },
+      data: {
+        type: "document",
+        id: document.id,
+        attributes: {
+          name: document.name,
+          title: document.title,
+          content: document.content,
+          version: document.version
+        }
       }
     }
 

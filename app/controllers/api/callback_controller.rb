@@ -4,8 +4,8 @@ class Api::CallbackController < ApplicationController
 
   def create
     case payload[:type]
-    when "pdf"
-      render json: {status: "Not Implemented", message: payload[:type] + " cannot be processed yet"}, status: 406
+    when "pdf_document"
+      render json: {status: "In Progress", message: payload[:type]}, status: 406
     when "pdf_preview"
       render json: {status: "OK", message: payload[:type] + " received"}
     when "pdf_thumbnail"

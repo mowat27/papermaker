@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+  
   resources 'documents' do
     post 'generate', as: 'generate'
     get 'download', as: 'download'

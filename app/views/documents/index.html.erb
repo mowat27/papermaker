@@ -12,7 +12,7 @@
     <tbody>
         <% @documents.each do |document| %>
         <tr>
-          <td class="title"><%= document.name %></td>
+          <td class="title"><%= document.id %>: <%= document.name %></td>
           <td class="action"><%= link_to("Edit", edit_document_path(document.id)) %></td>
           <td class="action">
             <% if document.pdf %>
@@ -25,7 +25,12 @@
           <td class="action"><%= link_to("Generate", document_generate_path(document.id), method: :post, remote: true) %></td>
           <td class="action"><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>
           <td class="status">
-            <%= react_component("PdfStatus", pdf: document.pdf) %>
+            <%= react_component("PdfStatus", 
+              {
+                document_id: document.id, 
+                pdf_id: document.try(:pdf).try(:id), 
+                pdf_status: document.try(:pdf).try(:status)
+            }) %>
           </td>
       <% end %>
     </tbody>

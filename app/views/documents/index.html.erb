@@ -18,7 +18,7 @@
               <%= link_to("Download", document_download_path(document), 
                           download: true, 
                           "data-pdf-id" => document.pdf.id,
-                          class: "pdf-download #{document.pdf.status}") %>
+                          class: "pdf-download") %>
             <% else %>
               <span class="pdf-download missing">missing pdf</span>
             <% end %>

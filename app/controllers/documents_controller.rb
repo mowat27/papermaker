@@ -67,13 +67,6 @@ class DocumentsController < ApplicationController
     queue = Rails.configuration.aws.pdfgen[:input_queue]
     pdf = Pdf.create_or_find_by(document_id: document.id)
     pdf.update(status: "pending")
-
-    ActionCable.server.broadcast('pdfs_channel', 
-      document_id: document.id,
-      pdf_id: document.pdf.id,
-      status: "pending"
-    )
-
     payload = {
       meta: {
         owner: "papermaker",

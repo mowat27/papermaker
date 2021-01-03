@@ -13,12 +13,6 @@ class Api::CallbackController < ApplicationController
             status: "available",
             expires_at: DateTime.parse(message.attributes.expires)
           )
-
-          ActionCable.server.broadcast('pdfs_channel', 
-            document_id: document.id,
-            pdf_id: document.pdf.id,
-            status: "available"
-          )
           render json: {message: "OK"}, status: 200
         else
           render json: {message: "Document has changed since the request"}, status: 406 

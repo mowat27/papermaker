@@ -22,6 +22,7 @@
             <% else %>
               <span class="pdf-download missing">missing pdf</span>
             <% end %>
+            <%= react_component("PdfStatus") %>
           </td>
           <td><%= link_to("Generate", document_generate_path(document.id), method: :post, remote: true) %></td>
           <td><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>

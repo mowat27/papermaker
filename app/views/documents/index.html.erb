@@ -6,26 +6,27 @@
       <tr>
         <th>Name</th>
         <th colspan="4">Actions</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
         <% @documents.each do |document| %>
         <tr>
           <td class="title"><%= document.name %></td>
-          <td><%= link_to("Edit", edit_document_path(document.id)) %></td>
-          <td>
+          <td class="action"><%= link_to("Edit", edit_document_path(document.id)) %></td>
+          <td class="action">
             <% if document.pdf %>
               <%= link_to("Download", document_download_path(document), 
                           download: true, 
                           "data-pdf-id" => document.pdf.id,
                           class: "pdf-download") %>
-            <% else %>
-              <span class="pdf-download missing">missing pdf</span>
             <% end %>
-            <%= react_component("PdfStatus") %>
           </td>
-          <td><%= link_to("Generate", document_generate_path(document.id), method: :post, remote: true) %></td>
-          <td><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>
+          <td class="action"><%= link_to("Generate", document_generate_path(document.id), method: :post, remote: true) %></td>
+          <td class="action"><%= link_to("Delete", document, :method => :delete, :confirm => "Are you sure ?") %></td>
+          <td class="status">
+            <%= react_component("PdfStatus", pdf: document.pdf) %>
+          </td>
       <% end %>
     </tbody>
   </table>

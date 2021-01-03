@@ -86,17 +86,21 @@ header {
     tr {
         line-height: 2em;
     }
+    td.action,
+    td.status {
+        text-align: center;
+    }
     a {
         text-decoration: underline;
     }
-    .pdf-download {
+    .pdf-status {
         color: black;
     }
-    .pdf-download.pending {
+    .pdf-status.pending {
         color: lightgray;
         text-decoration: none;
     }
-    .pdf-download.missing {
+    .pdf-status.missing {
         color: red;
     }
 }

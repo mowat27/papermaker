@@ -1,15 +1,18 @@
 import consumer from "./consumer"
 
 export default consumer.subscriptions.create("PdfsChannel", {
-    connected() {
-        // Called when the subscription is ready for use on the server
-    },
-
-    disconnected() {
-        // Called when the subscription has been terminated by the server
+    addReceiver(documentId, f) {
+      if(this.receivers === undefined) {
+        this.receivers = {}
+      }
+      this.receivers[documentId] = f
     },
 
     received(data) {
-        console.log(`PdfsChannel received ${data}`)
+      const {document_id, status} = data.body
+      console.log(`PdfsChannel received ${status} for ${document_id}`)
+      if(this.receivers[document_id] && status !== null) {
+        this.receivers[document_id](status)
+      }
     }
 });

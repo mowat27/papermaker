@@ -6,10 +6,11 @@ class Pdf < ApplicationRecord
   private 
 
   def notify_channel
-    ActionCable.server.broadcast('pdfs_channel', 
-      document_id: self.document.id,
-      pdf_id: self.document.pdf.id,
-      status: self.status
+    ActionCable.server.broadcast('pdfs_channel', body: {
+        document_id: self.document.id,
+        pdf_id: self.document.pdf.id,
+        status: self.status
+      }
     )
   end
 end
